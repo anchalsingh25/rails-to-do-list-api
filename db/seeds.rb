@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+Task.destroy_all
+tasks = [
+  { title: 'Create Project Proposal', description: 'Draft a project proposal outlining the scope, objectives, and timeline for the upcoming project.' },
+  { title: 'Develop User Authentication', description: 'Implement user authentication functionality using Devise gem to secure user accounts.' },
+  { title: 'Design Homepage Mockup', description: 'Create a mockup of the homepage UI/UX design for client review and feedback.' },
+  { title: 'Write API Documentation', description: 'Document the API endpoints, request/response formats, and authentication methods for the project.' },
+  { title: 'Test Payment Gateway Integration', description: 'Conduct thorough testing of the payment gateway integration to ensure smooth transactions.' }
+]
+
+tasks.each do |task_data|
+  Task.create(task_data)
+end

@@ -2,6 +2,8 @@ module Api
   module V1
     class TasksController < ApplicationController
       before_action :find_task, only: %i[update destroy]
+      rescue_from ActiveRecord::RecordInvalid, with: :invalid
+
       def index
         render json: Task.all
       end
@@ -31,6 +33,11 @@ module Api
         @task = Task.find_by_id(params[:id])
         return render json: { message: 'Task not found' }, status: :not_found if @task.nil?
       end
+
+      def invalid(invalid)
+        return render json: { error: invalid.record.errors.full_messages }, status: :unprocessable_entity
+      end
+
     end
   end
 end
